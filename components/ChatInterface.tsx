@@ -8,6 +8,7 @@ import { CHAT_STATUS } from "@/constants/chat";
 import { useRouter, useSearchParams } from "next/navigation";
 import useChatStore from "@/store/chatStore";
 import EmptyChat from "./EmptyChat";
+import { ThinkingAnimation } from "./ThinkingAnimation";
 
 const ChatInterface = () => {
   const router = useRouter();
@@ -97,12 +98,7 @@ const ChatInterface = () => {
                 isSender={message.isSender}
               />
             ))}
-            {status === CHAT_STATUS.SUBMITTED && (
-              <MessageBubble
-                message={{ text: "Thinking..." }}
-                isSender={false}
-              />
-            )}
+            {status === CHAT_STATUS.SUBMITTED && <ThinkingAnimation />}
             {status === CHAT_STATUS.ERROR && (
               <MessageBubble
                 message={{ text: "An error occurred. Please try again later." }}
@@ -114,7 +110,10 @@ const ChatInterface = () => {
         )}
       </div>
 
-      <form onSubmit={handleSendMessage} className="pb-4 px-4 md:px-10 xl:px-30">
+      <form
+        onSubmit={handleSendMessage}
+        className="pb-4 px-4 md:px-10 xl:px-30"
+      >
         <div className="relative">
           <input
             type="text"
