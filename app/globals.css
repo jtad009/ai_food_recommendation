@@ -45,3 +45,16 @@ ol {
   scrollbar-color: #c9cac5 #c9cac5;
   scrollbar-width: thin;
 }
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hidden-scrollbar {
+  scrollbar-width: none;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}

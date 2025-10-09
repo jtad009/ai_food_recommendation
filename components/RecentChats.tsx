@@ -13,11 +13,14 @@ const RecentChats = ({ toggleSidebar = () => {} }: RecentChatsProps) => {
   const chatMessages = useChatStore((state) => state.messages);
   const searchParams = useSearchParams();
   const activeChat = searchParams.get("chat");
+  const summaries = useChatStore((state) => state.summaries);
 
   const deleteChat = useChatStore((state) => state.deleteChat);
+  const deleteSummary = useChatStore((state) => state.deleteChatSummary);
 
   const handleDelete = (key: string) => {
     deleteChat(key);
+    deleteSummary(key);
     if (activeChat === key) {
       router.replace("/");
     }
@@ -46,7 +49,9 @@ const RecentChats = ({ toggleSidebar = () => {} }: RecentChatsProps) => {
             key={key}
           >
             <Link href={`/?chat=${key}`} onClick={onRecentChatClick}>
-              <span>{key}</span>
+              <span className="block whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px]">
+                {summaries[key] ?? "New Chat"}
+              </span>
             </Link>
             <button
               className="cursor-pointer invisible group-hover:visible"

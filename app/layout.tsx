@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Recipe Recommendation Bot",
-  description: "A chatbot that recommends recipes based on user preferences.",
+  title: "Chefnomy",
+  description: "Your wish is my recipe.",
 };
 
 export default function RootLayout({

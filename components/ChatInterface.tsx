@@ -9,6 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import useChatStore from "@/store/chatStore";
 import EmptyChat from "./EmptyChat";
 import { ThinkingAnimation } from "./ThinkingAnimation";
+import { getChatSummary } from "@/app/actions";
 
 const ChatInterface = () => {
   const router = useRouter();
@@ -17,6 +18,8 @@ const ChatInterface = () => {
   const chatId = chatParam || generateChatId();
   const initialMessages = useChatStore((state) => state.messages[chatId]);
   const saveChat = useChatStore((state) => state.addMessages);
+  const saveSummary = useChatStore((state) => state.addChatSummary);
+  const summaries = useChatStore((state) => state.summaries);
 
   const [newMessage, setNewMessage] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -70,6 +73,15 @@ const ChatInterface = () => {
     });
     setNewMessage("");
     setAutoScroll(true);
+    generateAndSaveSummary(newMessage);
+  };
+
+  const generateAndSaveSummary = async (firstMessage: string) => {
+    if (summaries[chatId]) return;
+    const { text } = await getChatSummary(firstMessage);
+    if (text) {
+      saveSummary(chatId, text);
+    }
   };
 
   const allMessages = getTextMessagesFromParts(messages);
@@ -120,13 +132,13 @@ const ChatInterface = () => {
             value={newMessage}
             id="chat-input"
             onChange={(e) => setNewMessage(e.target.value)}
-            className="block w-full p-6 md:ps-10 text-sm text-primary-700 border border-tertiary-200 bg-tertiary-200/10 rounded-xl focus:outline-primary-500 focus:ring-primary-500"
+            className="block w-full p-6 md:ps-10 text-primary-700 border border-tertiary-200 bg-tertiary-200/10 rounded-xl focus:outline-primary-500 focus:ring-primary-500"
             placeholder="Ask me anything about cooking, recipes, or ingredients..."
             required
           />
           <button
             type="submit"
-            className="cursor-pointer text-grey-100 absolute end-3 bottom-3 bg-primary-600 enabled:hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-xl text-sm px-3 py-3 disabled:bg-primary-500 disabled:cursor-not-allowed"
+            className="cursor-pointer text-grey-100 absolute end-3 bottom-3 bg-primary-600 enabled:hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-xl text-base px-3 py-3 disabled:bg-primary-500 disabled:cursor-not-allowed"
             disabled={
               status === CHAT_STATUS.SUBMITTED || newMessage.trim() === ""
             }

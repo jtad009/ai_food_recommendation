@@ -29,7 +29,7 @@ export default function Home() {
   if (isSidebarOpen === null) return null;
 
   return (
-    <div className="flex flex-col h-screen bg-primary-600">
+    <div className="flex flex-col bg-primary-600 h-full">
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar - always visible on desktop, collapsible on mobile */}
         <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />

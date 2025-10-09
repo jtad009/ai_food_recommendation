@@ -20,20 +20,20 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
           className={`flex items-center absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none md:translate-none`}
         >
           <div className="flex items-center">
-            <span className="font-bold text-lg text-primary-700 hidden md:block">
-              Recipe AI V1
+            <span className="font-bold text-lg text-primary-600 block">
+              Chefnomy
             </span>
           </div>
         </div>
       </div>
 
-      <div className="flex items-center">
+      {/* <div className="flex items-center">
         <div className="flex items-center">
           <div className="w-9 h-9 rounded-full bg-primary-600 flex items-center justify-center">
             <User size={16} className="text-grey-100" />
           </div>
         </div>
-      </div>
+      </div> */}
     </header>
   );
 };

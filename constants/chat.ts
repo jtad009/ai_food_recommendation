@@ -6,5 +6,6 @@ export const CHAT_STATUS = {
 };
 
 export const LOCAL_STORAGE_KEY = "recipe-bot-chats";
+export const LOCAL_STORAGE_KEY_SUMMARY = "recipe-bot-chats-summary";
 export const TABLET_BREAKPOINT = 768;
 

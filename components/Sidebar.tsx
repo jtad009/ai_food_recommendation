@@ -34,7 +34,7 @@ const Sidebar = ({ isOpen, toggleSidebar = () => {} }: SidebarProps) => {
       )}
       <aside
         className={`bg-primary-600 shadow-md h-full fixed inset-y-0 left-0 z-50 transform transition-all duration-300 ease-in-out
-         md:static md:block md:transform-none md:translate-none md:z-auto overflow-scroll
+         md:static md:block md:transform-none md:translate-none md:z-auto overflow-scroll hidden-scrollbar
          ${isOpen ? "translate-x-0 w-64" : "-translate-x-full w-20"}`}
       >
         <div className="flex flex-col h-full justify-between">
@@ -64,7 +64,7 @@ const Sidebar = ({ isOpen, toggleSidebar = () => {} }: SidebarProps) => {
                 {isOpen && <span>New Chat</span>}
               </button>
               {isOpen && (
-                <div className="ps-2 py-2 text-sm font-semibold text-grey-200">
+                <div className="ps-2 py-2 text-base font-semibold text-grey-200">
                   Recent Chats
                 </div>
               )}

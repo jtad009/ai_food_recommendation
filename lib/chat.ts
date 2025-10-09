@@ -1,4 +1,4 @@
-import { LOCAL_STORAGE_KEY } from "@/constants/chat";
+import { LOCAL_STORAGE_KEY, LOCAL_STORAGE_KEY_SUMMARY } from "@/constants/chat";
 import { ChatPart } from "@/types/chat";
 import { UIMessage, UIDataTypes, UITools, generateId } from "ai";
 
@@ -49,6 +49,14 @@ export function getStoredChats() {
   return storedMessages;
 }
 
+export function getStoredChatSummary() {
+  if (typeof window === "undefined") return {};
+  const storedMessages = JSON.parse(
+    localStorage.getItem(LOCAL_STORAGE_KEY_SUMMARY) || "{}"
+  );
+  return storedMessages;
+}
+
 export function saveChat(
   id: string,
   messages: UIMessage<unknown, UIDataTypes, UITools>[]
@@ -64,5 +72,20 @@ export function deleteChat(id: string) {
   if (chats[id]) {
     delete chats[id];
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(chats));
+  }
+}
+
+export function saveChatSummary(id: string, summary: string) {
+  if (!id) return;
+  const chats = getStoredChatSummary();
+  chats[id] = summary;
+  localStorage.setItem(LOCAL_STORAGE_KEY_SUMMARY, JSON.stringify(chats));
+}
+
+export function deleteChatSummary(id: string) {
+  const chats = getStoredChatSummary();
+  if (chats[id]) {
+    delete chats[id];
+    localStorage.setItem(LOCAL_STORAGE_KEY_SUMMARY, JSON.stringify(chats));
   }
 }

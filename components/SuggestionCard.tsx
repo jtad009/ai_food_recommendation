@@ -40,7 +40,7 @@ const SuggestionCard = ({
         <Icon size={48} className={`text-${iconColor}`} />
       </div>
       <div className={`${titleTextColor} text-xl`}>{title}</div>
-      <div className={`${subTitleTextColor} text-sm`}>{subTitle}</div>
+      <div className={`${subTitleTextColor}`}>{subTitle}</div>
       <div
         className={`absolute bottom-4 right-4 w-8 h-8 rounded-full bg-${iconColor} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
       ></div>
